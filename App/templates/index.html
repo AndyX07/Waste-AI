@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste AI</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='/index.css')}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+<body>
+    <div class = "home">
+        <div class="navbar">
+            <img src = "{{url_for('static', filename='/assets/logo.png')}}" width ="100" height="100" class = "logo"/>
+            <a href = "#try">
+                Try
+            </a>
+            <a href = "#about">
+                About
+            </a>
+        </div>
+        <div class = "intro">
+            <p>Revolutionizing Waste Classification with Machine Learning</p>
+            <h1>
+                Classify Waste With Waste.AI
+            </h1>
+            <h2>
+                Waste.AI is a web application that uses a machine learning model to classify waste into 7 categories: electronic, glass, metal, paper, plastic, organic, and textile
+            </h2>
+        </div>
+        <div class = "about" id = "about">
+            <table>
+            <tr>
+                <td class = "t1">
+                    <p>Classifies Waste With Over 80% Accuracy</p>
+                    <span class="material-symbols-outlined">
+                        settings
+                    </span>
+                </td>
+                <td class = "t2">
+                    <p>Utilizes a CNN That is Built on Top of Mobile Net V2</p>
+                    <span class="material-symbols-outlined">
+                        build
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class = "t3">
+                    <p>
+                        Trained on a Dataset of Over 7400 Images 
+                    </p>
+                    <span class="material-symbols-outlined">
+                        model_training
+                    </span>
+                </td>
+                <td class = "t4">
+                    <p>
+                        Enables You to Classify Any Waste With Just a Picture
+                    </p>
+                    <span class="material-symbols-outlined">
+                        photo_camera
+                    </span>
+                </td>
+            </tr>
+            </table>
+        </div>
+        <div class = "try" id = "try">
+            <h1>Try</h1>
+            <div class = "upload">
+                <p>Files Supported: JPG, JPEG, PNG</p>
+                {% if img %}
+                    <img src= "{{img}}" alt="Image" width="300" height="300" style = "margin-bottom: 20px">
+                {% endif %}
+                <form action='/', method="post" enctype="multipart/form-data">
+                    <label class = "uploadbtn">
+                        <input type="file" name="imagefile" style="display:none">
+                        Choose Image
+                    </label>
+                    <input type="submit" value="Predict Image" >
+                </form>
+            </div>
+        </div>
+        {% if prediction %}
+        <div class = "classification">
+            <h2>
+                Your waste was classified as {{ prediction }}
+            </h2>
+            {% if disposal %}
+                <p>
+                    {{ disposal }}
+                </p>
+            {% endif %}
+            {% if description %}
+                <p>
+                    {{ description }}
+                </p>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
